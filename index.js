@@ -4,23 +4,18 @@ const context = canvas.getContext('2d');
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 
-function game(){
-    update();
-    render();
-    requestAnimationFrame(game);
-}
-requestAnimationFrame(game);
+
 
 let player1 = {
     x:10,
     y:220,
-    dy:5,
+    dy:4,
 }
 
 let player2 = {
     x:570,
     y:220,
-    dy:5,
+    dy:4,
 }
 
 let ball = {
@@ -31,12 +26,23 @@ let ball = {
     radius : 10,
 }
 
+let player1Score = 0;
+let player2Score = 0;
+
+function game(){
+    update();
+    render();
+    requestAnimationFrame(game);
+}
+requestAnimationFrame(game);
+
 function update(){
     move();
     moveFirstPlayer();
     moveSecondPlayer();
     checkCollision();
     ballMove();
+    updateScore();
 }
 
 let player1Direction = '';
@@ -118,6 +124,11 @@ function ballMove(){
     }
 }
 
+function updateScore(){
+    if(ball.x <= 0) player2Score += 1;
+    if(ball.x +10 >= 600) player1Score+=1;
+}
+
 function render(){
     context.clearRect(0,0,canvas.width,canvas.height);
 
@@ -129,6 +140,10 @@ function render(){
     context.arc(ball.x , ball.y, ball.radius, 0,2*Math.PI)
 
     context.fillStyle = "#423652";
+
+    context.font = "35px Arial";
+    context.fillText(player1Score,30,50);
+    context.fillText(player2Score,550,50);
 
     context.fill();
 
