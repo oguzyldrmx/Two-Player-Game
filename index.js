@@ -35,6 +35,7 @@ function update(){
     move();
     moveFirstPlayer();
     moveSecondPlayer();
+    checkCollision();
 }
 
 let player1Direction = '';
@@ -85,6 +86,20 @@ function moveSecondPlayer(){
             player2Direction = ''
         }
     })
+}
+
+function checkCollision(){
+    if(player1.y <= 0){
+        player1.y = 0;
+    }else if(player1.y + 60 >=500){
+        player1.y = 440;
+    }
+
+    if(player2.y <= 0){
+        player2.y = 0;
+    }else if(player2.y + 60 >=500){
+        player2.y = 440;
+    }
 }
 
 function render(){
