@@ -32,8 +32,61 @@ let ball = {
 }
 
 function update(){
-
+    move();
+    moveFirstPlayer();
+    moveSecondPlayer();
 }
+
+let player1Direction = '';
+let player2Direction = '';
+
+function move(){
+    if(player1Direction === 'up'){
+        player1.y -= player1.dy;
+    }else if( player1Direction === 'down'){
+        player1.y += player1.dy;
+    }
+
+    if(player2Direction === 'up'){
+        player2.y -= player2.dy;
+    }else if( player2Direction === 'down'){
+        player2.y += player2.dy;
+    }
+}
+
+function moveFirstPlayer(){
+    document.addEventListener('keydown',(e) =>{
+        if(e.keyCode === 83){
+            player1Direction = 'down';
+        }else if(e.keyCode === 87 ){
+            player1Direction = 'up'
+        }
+    })
+    document.addEventListener('keyup',(e) =>{
+        if(e.keyCode === 83){
+            player1Direction = '';
+        }else if(e.keyCode === 87 ){
+            player1Direction = ''
+        }
+    })
+}
+function moveSecondPlayer(){
+    document.addEventListener('keydown',(e) =>{
+        if(e.keyCode === 40){
+            player2Direction = 'down';
+        }else if(e.keyCode === 38 ){
+            player2Direction = 'up';
+        }
+    })
+    document.addEventListener('keyup',(e) =>{
+        if(e.keyCode === 40){
+            player2Direction = '';
+        }else if(e.keyCode === 38 ){
+            player2Direction = ''
+        }
+    })
+}
+
 function render(){
     context.clearRect(0,0,canvas.width,canvas.height);
 
