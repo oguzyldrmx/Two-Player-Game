@@ -26,8 +26,8 @@ let player2 = {
 let ball = {
     x: 300,
     y: 250,
-    dx : 7 ,
-    dy: 2,
+    dx : 4 ,
+    dy: 1,
     radius : 10,
 }
 
@@ -36,6 +36,7 @@ function update(){
     moveFirstPlayer();
     moveSecondPlayer();
     checkCollision();
+    ballMove();
 }
 
 let player1Direction = '';
@@ -99,6 +100,21 @@ function checkCollision(){
         player2.y = 0;
     }else if(player2.y + 60 >=500){
         player2.y = 440;
+    }
+}
+
+function ballMove(){
+    ball.x += ball.dx;
+    ball.y -= ball.dy;
+
+    if(ball.x >= 590 || ball.x <=0) ball.dx = -ball.dx;
+    if(ball.y <= 0 || ball.y >= 490) ball.dy = -ball.dy;
+
+    if(ball.x <= player1.x +20 && ball.y >= player1.y && ball.y + 5 <= player1.y +60){
+        ball.dx = -ball.dx;
+    }
+    if(ball.x >= player2.x -5 && ball.y >= player2.y && ball.y + 10 <= player2.y +60){
+        ball.dx = -ball.dx;
     }
 }
 
